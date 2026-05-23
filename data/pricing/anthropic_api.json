@@ -1,0 +1,11 @@
+{
+  "tool": "anthropic_api",
+  "displayName": "Anthropic API",
+  "vendor": "Anthropic",
+  "category": "mixed",
+  "sourceUrl": "https://www.anthropic.com/pricing#702",
+  "lastVerified": "2025-05-20",
+  "plans": [
+    { "id": "paygo", "name": "Pay-as-you-go", "pricePerSeat": 0, "billingPeriod": "monthly", "minSeats": 1, "features": ["Haiku/Sonnet/Opus access", "Usage-based billing"] }
+  ]
+}

@@ -1,0 +1,16 @@
+# Project Reflection
+
+**Q1: What was the hardest technical decision you made?**
+The hardest decision was choosing whether to build the audit engine using an LLM (passing the JSON to Claude and asking it to find savings) versus building a deterministic, hardcoded rules engine. I ultimately chose the hardcoded engine. While an LLM would have been faster to build, it introduces hallucination risk when dealing with financial data. A user needs to trust the math. If an LLM hallucinates a $10/mo savings, the tool loses all credibility. The hardcoded engine required me to manually compile pricing data and write complex cross-tool checks (like detecting Copilot + Cursor overlaps), but it guarantees 100% accuracy and is easily auditable.
+
+**Q2: If you had 2 more weeks, what would you add?**
+Now that the FastAPI + PostgreSQL enterprise backend is built, I would focus entirely on user experience. First, I would add a "Upload CSV/PDF Invoice" feature where users could upload their Stripe or Ramp exports, and we would parse the AI tool spend automatically instead of requiring manual form entry. Second, I would add a team-sharing feature where an engineering manager could share the audit with their CFO for approval. Finally, I would implement an automated web scraper via Celery to automatically check for vendor pricing changes daily.
+
+**Q3: What did you learn about AI API integration?**
+I learned that using LLMs for highly structured, numerical tasks is generally a bad idea, but using them for "translation" (turning JSON data into a readable executive summary) is where they shine. By limiting Claude's role strictly to the `/api/v1/summary` route and feeding it the pre-calculated, deterministic `AuditResult` JSON, I got the best of both worlds: perfect math and a personalized, human-sounding report. I also learned the importance of having a synchronous fallback function in case the API rate limits or times out, ensuring the user always gets a result.
+
+**Q4: How would you scale this to 10,000 users/day?**
+At 10,000 users/day, the two main bottlenecks are the database inserts and the Anthropic API limits. For the database, our dedicated PostgreSQL container handles 10k inserts easily, but I would add Redis to cache the pricing data so we aren't fetching it from disk/DB on every audit. For the API, 10k Claude calls would hit rate limits and cost around $150/day. Since we are using FastAPI, I would move the AI summary generation to a Celery background queue. The user would see the hardcoded numbers instantly, and the AI summary would stream in via WebSockets or polling once it's ready. We could also scale the FastAPI backend across multiple Kubernetes pods.
+
+**Q5: What surprised you most during development?**
+I was most surprised by how difficult it is to find transparent, seat-based pricing for Enterprise tiers. Tools like ChatGPT Enterprise and GitHub Copilot Enterprise hide their volume discounts behind sales calls. This meant I had to design the audit engine to handle "custom" or "$0" base prices and flag them for manual review rather than calculating exact savings. It reinforced the value proposition of Credex: if pricing is opaque, startups definitely need a third party to negotiate for them.

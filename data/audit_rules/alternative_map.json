@@ -1,0 +1,14 @@
+{
+  "copilot": {
+    "coding": ["cursor", "windsurf"]
+  },
+  "claude": {
+    "coding": ["windsurf", "cursor"]
+  },
+  "chatgpt": {
+    "coding": ["windsurf", "cursor"]
+  },
+  "gemini": {
+    "coding": ["windsurf", "cursor"]
+  }
+}

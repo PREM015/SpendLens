@@ -1,0 +1,7 @@
+{
+  "threshold": 500,
+  "currency": "USD",
+  "period": "monthly",
+  "action": "flag_for_credex",
+  "description": "If total monthly spend across all tools is > $500, flag the audit for Credex volume negotiation."
+}

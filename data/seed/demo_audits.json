@@ -1,0 +1,23 @@
+[
+  {
+    "id": "demo_audit_1",
+    "share_token": "demo-share-token-123",
+    "monthly_savings": 500,
+    "annual_savings": 6000,
+    "tools": [
+      {
+        "tool": "chatgpt",
+        "current_plan": "team",
+        "current_spend": 600,
+        "seats": 20,
+        "use_case": "writing",
+        "recommended_action": "switch",
+        "recommended_plan": "pro",
+        "recommended_tool": "claude",
+        "monthly_savings": 200,
+        "annual_savings": 2400,
+        "reason": "Claude Pro is more cost-effective for writing"
+      }
+    ]
+  }
+]

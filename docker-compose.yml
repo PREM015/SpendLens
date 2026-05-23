@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: credex
+      POSTGRES_PASSWORD: credex
+      POSTGRES_DB: spendlens
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"

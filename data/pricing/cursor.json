@@ -1,0 +1,13 @@
+{
+  "tool": "cursor",
+  "displayName": "Cursor",
+  "vendor": "Anysphere",
+  "category": "coding",
+  "sourceUrl": "https://www.cursor.com/pricing",
+  "lastVerified": "2025-05-20",
+  "plans": [
+    { "id": "hobby", "name": "Hobby", "pricePerSeat": 0, "billingPeriod": "monthly", "minSeats": 1, "features": ["2000 completions", "50 slow premium requests"] },
+    { "id": "pro", "name": "Pro", "pricePerSeat": 20, "billingPeriod": "monthly", "minSeats": 1, "features": ["Unlimited completions", "500 fast premium requests", "Unlimited slow premium requests"] },
+    { "id": "business", "name": "Business", "pricePerSeat": 40, "billingPeriod": "monthly", "minSeats": 1, "features": ["Everything in Pro", "Admin dashboard", "SSO", "Usage policies", "SAML"] }
+  ]
+}

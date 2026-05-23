@@ -1,0 +1,200 @@
+@import "tailwindcss";
+
+/* ─── Design tokens ──────────────────────────────────────────────── */
+:root {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ─── Base ────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #000000;
+  color: #e2e8f0;
+  min-height: 100vh;
+}
+
+::selection {
+  background-color: rgba(139, 92, 246, 0.3);
+  color: #fff;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #09090b; }
+::-webkit-scrollbar-thumb { background: #27272a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
+
+/* ─── Aceternity-style Spotlight ─────────────────────────────────── */
+.spotlight {
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(139, 92, 246, 0.06),
+    transparent 40%
+  );
+}
+
+/* ─── Animated gradient border ───────────────────────────────────── */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate-gradient {
+  to { --angle: 360deg; }
+}
+
+.animated-border {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.animated-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--angle),
+    transparent 25%,
+    rgba(139, 92, 246, 0.5) 50%,
+    transparent 75%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: rotate-gradient 4s linear infinite;
+}
+
+/* ─── Meteor effect ──────────────────────────────────────────────── */
+@keyframes meteor {
+  0% { transform: rotate(215deg) translateX(0); opacity: 1; }
+  70% { opacity: 1; }
+  100% { transform: rotate(215deg) translateX(-600px); opacity: 0; }
+}
+
+.meteor {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  border-radius: 9999px;
+  background: linear-gradient(to bottom, #a78bfa, transparent);
+  box-shadow: 0 0 0 1px rgba(139,92,246,0.05);
+  animation: meteor 4s linear infinite;
+}
+
+.meteor::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(to right, #a78bfa, transparent);
+}
+
+/* ─── Lamp effect ────────────────────────────────────────────────── */
+@keyframes lamp-pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+.lamp-cone {
+  background: conic-gradient(
+    from 90deg at 50% 0%,
+    transparent 30%,
+    rgba(139, 92, 246, 0.08) 40%,
+    rgba(139, 92, 246, 0.15) 50%,
+    rgba(139, 92, 246, 0.08) 60%,
+    transparent 70%
+  );
+  animation: lamp-pulse 6s ease-in-out infinite;
+}
+
+/* ─── Text shimmer ───────────────────────────────────────────────── */
+@keyframes text-shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #e2e8f0 0%,
+    #a78bfa 25%,
+    #c084fc 50%,
+    #a78bfa 75%,
+    #e2e8f0 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shimmer 4s linear infinite;
+}
+
+/* ─── Card 3D hover ──────────────────────────────────────────────── */
+.card-3d {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.card-3d-inner {
+  transition: transform 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.card-3d:hover .card-3d-inner {
+  transform: rotateX(2deg) rotateY(-2deg) scale(1.02);
+}
+
+/* ─── Dot grid bg ────────────────────────────────────────────────── */
+.dot-grid {
+  background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ─── Skeleton shimmer ───────────────────────────────────────────── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(90deg, rgba(24,24,27,0.4) 25%, rgba(39,39,42,0.4) 50%, rgba(24,24,27,0.4) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* ─── Marquee ────────────────────────────────────────────────────── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ─── Glow pulse ─────────────────────────────────────────────────── */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(139,92,246,0.15), 0 0 60px rgba(139,92,246,0.05); }
+  50% { box-shadow: 0 0 30px rgba(139,92,246,0.25), 0 0 80px rgba(139,92,246,0.1); }
+}
+
+.glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}

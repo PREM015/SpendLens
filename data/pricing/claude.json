@@ -1,0 +1,14 @@
+{
+  "tool": "claude",
+  "displayName": "Claude",
+  "vendor": "Anthropic",
+  "category": "writing",
+  "sourceUrl": "https://www.anthropic.com/pricing",
+  "lastVerified": "2025-05-20",
+  "plans": [
+    { "id": "free", "name": "Free", "pricePerSeat": 0, "billingPeriod": "monthly", "minSeats": 1, "features": ["Basic access"] },
+    { "id": "pro", "name": "Pro", "pricePerSeat": 20, "billingPeriod": "monthly", "minSeats": 1, "features": ["Higher usage limits", "Priority access"] },
+    { "id": "team", "name": "Team", "pricePerSeat": 30, "billingPeriod": "monthly", "minSeats": 5, "features": ["Higher usage limits", "Admin controls", "Billing management"] },
+    { "id": "max", "name": "Max", "pricePerSeat": 100, "billingPeriod": "monthly", "minSeats": 1, "features": ["Highest usage limits"] }
+  ]
+}

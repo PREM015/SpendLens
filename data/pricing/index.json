@@ -1,0 +1,10 @@
+[
+  { "id": "cursor", "name": "Cursor", "file": "cursor.json" },
+  { "id": "copilot", "name": "GitHub Copilot", "file": "github_copilot.json" },
+  { "id": "claude", "name": "Claude", "file": "claude.json" },
+  { "id": "chatgpt", "name": "ChatGPT", "file": "chatgpt.json" },
+  { "id": "anthropic_api", "name": "Anthropic API", "file": "anthropic_api.json" },
+  { "id": "openai_api", "name": "OpenAI API", "file": "openai_api.json" },
+  { "id": "gemini", "name": "Gemini", "file": "gemini.json" },
+  { "id": "windsurf", "name": "Windsurf", "file": "windsurf.json" }
+]

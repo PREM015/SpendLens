@@ -1,0 +1,13 @@
+{
+  "tool": "github_copilot",
+  "displayName": "GitHub Copilot",
+  "vendor": "GitHub",
+  "category": "coding",
+  "sourceUrl": "https://github.com/features/copilot#pricing",
+  "lastVerified": "2025-05-20",
+  "plans": [
+    { "id": "individual", "name": "Individual", "pricePerSeat": 10, "billingPeriod": "monthly", "minSeats": 1, "features": ["Code completions", "Chat"] },
+    { "id": "business", "name": "Business", "pricePerSeat": 19, "billingPeriod": "monthly", "minSeats": 1, "features": ["Everything in Individual", "Enterprise management", "IP indemnity"] },
+    { "id": "enterprise", "name": "Enterprise", "pricePerSeat": 39, "billingPeriod": "monthly", "minSeats": 1, "features": ["Everything in Business", "Custom models", "GitHub.com integration"] }
+  ]
+}

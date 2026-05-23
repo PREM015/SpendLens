@@ -1,0 +1,11 @@
+{
+  "tool": "openai_api",
+  "displayName": "OpenAI API",
+  "vendor": "OpenAI",
+  "category": "mixed",
+  "sourceUrl": "https://openai.com/api/pricing",
+  "lastVerified": "2025-05-20",
+  "plans": [
+    { "id": "paygo", "name": "Pay-as-you-go", "pricePerSeat": 0, "billingPeriod": "monthly", "minSeats": 1, "features": ["GPT-4o/mini access", "Usage-based billing"] }
+  ]
+}

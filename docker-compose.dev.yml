@@ -1,0 +1,52 @@
+services:
+  db:
+    image: postgres:15
+    container_name: credex-db
+    restart: always
+    environment:
+      POSTGRES_USER: credex
+      POSTGRES_PASSWORD: credex
+      POSTGRES_DB: spendlens
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/init.sql
+
+  redis:
+    image: redis:alpine
+    container_name: credex-redis
+    restart: always
+    ports:
+      - "6379:6379"
+
+  backend:
+    build:
+      context: ./backend
+    container_name: credex-backend
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://credex:credex@db:5432/spendlens
+      - REDIS_URL=redis://redis:6379/0
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - RESEND_API_KEY=${RESEND_API_KEY:-}
+    depends_on:
+      - db
+      - redis
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: credex-frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api/v1
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

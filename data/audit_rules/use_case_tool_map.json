@@ -1,0 +1,7 @@
+{
+  "coding": ["cursor", "windsurf", "copilot"],
+  "writing": ["claude", "chatgpt", "gemini"],
+  "data": ["claude", "chatgpt", "openai_api"],
+  "research": ["gemini", "claude"],
+  "mixed": ["chatgpt", "claude"]
+}

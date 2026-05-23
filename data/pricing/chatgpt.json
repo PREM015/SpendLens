@@ -1,0 +1,14 @@
+{
+  "tool": "chatgpt",
+  "displayName": "ChatGPT",
+  "vendor": "OpenAI",
+  "category": "writing",
+  "sourceUrl": "https://openai.com/chatgpt/pricing",
+  "lastVerified": "2025-05-20",
+  "plans": [
+    { "id": "free", "name": "Free", "pricePerSeat": 0, "billingPeriod": "monthly", "minSeats": 1, "features": ["Basic access"] },
+    { "id": "plus", "name": "Plus", "pricePerSeat": 20, "billingPeriod": "monthly", "minSeats": 1, "features": ["Higher usage limits", "Priority access"] },
+    { "id": "team", "name": "Team", "pricePerSeat": 30, "billingPeriod": "monthly", "minSeats": 2, "features": ["Higher usage limits", "Admin controls", "Collaborative workspace"] },
+    { "id": "enterprise", "name": "Enterprise", "pricePerSeat": 0, "billingPeriod": "monthly", "minSeats": 150, "features": ["Custom pricing"] }
+  ]
+}

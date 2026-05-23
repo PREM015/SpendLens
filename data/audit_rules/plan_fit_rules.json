@@ -1,0 +1,98 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-05-20",
+  "rules": [
+    {
+      "id": "claude-team-min-seats",
+      "tool": "claude",
+      "plan": "team",
+      "condition": "seats < minSeats",
+      "minSeats": 5,
+      "severity": "high",
+      "recommendation": "downgrade",
+      "targetPlan": "pro",
+      "message": "Claude Team requires a minimum of 5 seats. With {{seats}} seat(s), switching each user to Claude Pro ($20/mo) saves ${{savings}}/mo.",
+      "savingsFormula": "(30 * seats) - (20 * seats)",
+      "explanation": "Claude Team at $30/seat has a 5-seat minimum ($150/mo floor). For teams under 5, individual Pro plans at $20/seat are more cost-effective."
+    },
+    {
+      "id": "cursor-business-solo",
+      "tool": "cursor",
+      "plan": "business",
+      "condition": "seats === 1",
+      "severity": "high",
+      "recommendation": "downgrade",
+      "targetPlan": "pro",
+      "message": "Cursor Business ($40/mo) for a single user is wasteful. Cursor Pro ($20/mo) offers the same core features. Save $20/mo.",
+      "savingsFormula": "40 - 20",
+      "explanation": "Cursor Business adds admin dashboard, SSO, and SAML — features irrelevant for solo developers."
+    },
+    {
+      "id": "copilot-enterprise-small-team",
+      "tool": "github_copilot",
+      "plan": "enterprise",
+      "condition": "seats <= 5",
+      "severity": "medium",
+      "recommendation": "downgrade",
+      "targetPlan": "business",
+      "message": "GitHub Copilot Enterprise ($39/seat) may be overkill for {{seats}} developers. Business ($19/seat) covers most needs. Save ${{savings}}/mo.",
+      "savingsFormula": "(39 - 19) * seats",
+      "explanation": "Enterprise features like fine-tuned models and knowledge bases require significant team investment to leverage effectively."
+    },
+    {
+      "id": "chatgpt-team-duo",
+      "tool": "chatgpt",
+      "plan": "team",
+      "condition": "seats === 2 && usage < 'moderate'",
+      "severity": "medium",
+      "recommendation": "downgrade",
+      "targetPlan": "plus",
+      "message": "ChatGPT Team ($30/seat) for 2 users with moderate usage — consider 2× Plus ($20/seat) to save $20/mo.",
+      "savingsFormula": "(30 * seats) - (20 * seats)",
+      "explanation": "Team features like workspace collaboration add limited value for 2-person teams."
+    },
+    {
+      "id": "duplicate-coding-tools",
+      "tool": "*",
+      "category": "coding",
+      "condition": "countToolsInCategory('coding') > 1",
+      "severity": "high",
+      "recommendation": "consolidate",
+      "message": "You're paying for {{count}} coding assistants ({{tools}}). Most developers only need one. Consolidating could save ${{savings}}/mo.",
+      "savingsFormula": "totalCodingSpend - maxSingleToolCost",
+      "explanation": "Cursor, GitHub Copilot, and Windsurf serve overlapping purposes. Pick the one your team prefers and drop the rest."
+    },
+    {
+      "id": "duplicate-ai-assistants",
+      "tool": "*",
+      "category": "ai-assistant",
+      "condition": "countPaidToolsInCategory('ai-assistant') > 1",
+      "severity": "medium",
+      "recommendation": "consolidate",
+      "message": "You're paying for {{count}} AI assistants ({{tools}}). Consider keeping one paid plan and using free tiers for others. Potential savings: ${{savings}}/mo.",
+      "savingsFormula": "totalAssistantSpend - maxSingleToolCost",
+      "explanation": "Claude, ChatGPT, and Gemini overlap significantly. Keep the primary tool paid and use free tiers for edge cases."
+    },
+    {
+      "id": "windsurf-teams-solo",
+      "tool": "windsurf",
+      "plan": "teams",
+      "condition": "seats === 1",
+      "severity": "high",
+      "recommendation": "downgrade",
+      "targetPlan": "pro",
+      "message": "Windsurf Teams ($35/mo) for a single user is unnecessary. Windsurf Pro ($15/mo) saves $20/mo.",
+      "savingsFormula": "35 - 15",
+      "explanation": "Teams plan adds admin dashboard, centralized billing, and SSO — none of which benefit solo developers."
+    },
+    {
+      "id": "optimal-plan",
+      "tool": "*",
+      "condition": "noIssuesFound",
+      "severity": "info",
+      "recommendation": "none",
+      "message": "Your current AI tool stack looks well-optimized. No immediate savings opportunities found.",
+      "explanation": "All tools are on appropriate plans for the reported team size and usage."
+    }
+  ]
+}

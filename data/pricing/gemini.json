@@ -1,0 +1,12 @@
+{
+  "tool": "gemini",
+  "displayName": "Gemini",
+  "vendor": "Google",
+  "category": "writing",
+  "sourceUrl": "https://gemini.google.com/advanced",
+  "lastVerified": "2025-05-20",
+  "plans": [
+    { "id": "free", "name": "Free", "pricePerSeat": 0, "billingPeriod": "monthly", "minSeats": 1, "features": ["Basic access"] },
+    { "id": "advanced", "name": "Advanced", "pricePerSeat": 19.99, "billingPeriod": "monthly", "minSeats": 1, "features": ["Gemini 1.5 Pro", "Google Workspace integration"] }
+  ]
+}

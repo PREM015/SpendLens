@@ -1,0 +1,23 @@
+[
+  {
+    "tool_id": "cursor",
+    "plan_name": "hobby",
+    "monthly_usd_per_seat": 0,
+    "source_url": "https://cursor.sh/pricing",
+    "last_verified": "2026-05-22"
+  },
+  {
+    "tool_id": "cursor",
+    "plan_name": "pro",
+    "monthly_usd_per_seat": 20,
+    "source_url": "https://cursor.sh/pricing",
+    "last_verified": "2026-05-22"
+  },
+  {
+    "tool_id": "cursor",
+    "plan_name": "business",
+    "monthly_usd_per_seat": 40,
+    "source_url": "https://cursor.sh/pricing",
+    "last_verified": "2026-05-22"
+  }
+]
