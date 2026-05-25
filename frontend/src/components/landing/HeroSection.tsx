@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuditStore } from '@/stores/auditStore';
 import { mockAuditData } from '@/utils/mockData';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ArrowRight, Shield, Clock, Zap } from 'lucide-react';
 import { TextGenerateEffect } from '@/components/ui/TextGenerateEffect';
 import { FloatingParticles } from '@/components/ui/FloatingParticles';
@@ -12,17 +12,22 @@ import { useLanguage } from '@/contexts/LanguageProvider';
 
 /* ─── Meteors background ─────────────────────────────────────────── */
 function Meteors({ count = 12 }: { count?: number }) {
-  const meteors = Array.from({ length: count }, (_, i) => ({
-    id: i,
-    left: `${Math.random() * 100}%`,
-    delay: `${Math.random() * 5}s`,
-    duration: `${3 + Math.random() * 4}s`,
-    size: `${60 + Math.random() * 80}px`,
-  }));
+  const [meteorsList, setMeteorsList] = useState<Array<{id: number; left: string; delay: string; duration: string; size: string}>>([]);
+
+  useEffect(() => {
+    const generatedMeteors = Array.from({ length: count }, (_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      delay: `${Math.random() * 5}s`,
+      duration: `${3 + Math.random() * 4}s`,
+      size: `${60 + Math.random() * 80}px`,
+    }));
+    setMeteorsList(generatedMeteors);
+  }, [count]);
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {meteors.map((m) => (
+      {meteorsList.map((m) => (
         <div
           key={m.id}
           className="meteor"

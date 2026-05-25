@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import { AuditResponse } from '@/types';
 
 export function useAiSummary() {
   const [summary, setSummary] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchSummary = async (auditData: any) => {
+  const fetchSummary = async (auditData: AuditResponse) => {
     setIsLoading(true);
     setError(null);
 
@@ -35,8 +36,9 @@ export function useAiSummary() {
       const summaryText = result.data?.summary || result.summary;
       setSummary(summaryText);
       return summaryText;
-    } catch (err: any) {
-      setError(err.message || 'Error fetching summary');
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Error fetching summary';
+      setError(message);
       return null;
     } finally {
       setIsLoading(false);

@@ -25,8 +25,9 @@ export function useAudit() {
       const result: AuditResponse = json.data?.result || json;
       setResult(result);
       return result;
-    } catch (err: any) {
-      setError(err.message || 'An error occurred');
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'An error occurred';
+      setError(message);
       return null;
     } finally {
       setIsLoading(false);

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useLayoutEffect } from 'react';
 import { formatCurrency as formatCurrencyUtils, formatCompactCurrency as formatCompactCurrencyUtils } from '@/utils/formatCurrency';
 
 export type CurrencyCode = 'USD' | 'EUR' | 'GBP' | 'INR';
@@ -26,8 +26,11 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
   const [currency, setCurrencyState] = useState<CurrencyCode>('USD');
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
     const saved = localStorage.getItem('spendlens-currency') as CurrencyCode;
     if (saved && RATES[saved]) {
       setCurrencyState(saved);

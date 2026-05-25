@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+import { AuditResponse } from '@/types';
 
 export function useShare(token: string) {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<AuditResponse | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -14,8 +15,9 @@ export function useShare(token: string) {
         }
         const result = await res.json();
         setData(result.data?.audit || result.audit || result);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err) {
+        const message = err instanceof Error ? err.message : 'An error occurred';
+        setError(message);
       } finally {
         setIsLoading(false);
       }

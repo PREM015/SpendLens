@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { Search, Zap, Layers, BarChart3, TrendingDown, Clock, ShieldCheck } from 'lucide-react';
+import { Search, Zap, Layers, BarChart3, TrendingDown, ShieldCheck } from 'lucide-react';
 import { SpotlightCard } from '@/components/ui/SpotlightCard';
 
 const features = [

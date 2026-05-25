@@ -12,7 +12,6 @@ import html2canvas from 'html2canvas';
 export function ExportButton({ auditData }: { auditData: AuditResponse | null }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isExporting, setIsExporting] = useState<'pdf' | 'csv' | null>(null);
-  const { currency } = useCurrency();
   const { t } = useLanguage();
 
   const handleExportCSV = () => {

@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { CopyButton } from '@/components/ui/CopyButton';
 import { buildShareUrl } from '@/utils/shareUrl';
 import { Share2, Link2 } from 'lucide-react';

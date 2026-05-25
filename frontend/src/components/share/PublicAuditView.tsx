@@ -42,14 +42,14 @@ export function PublicAuditView({ token }: { token: string }) {
 
       <div className="space-y-4">
         <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">Tool Breakdown</h2>
-        {data.tools.map((tool: any, index: number) => (
+        {data.tools.map((tool: { name: string; currentSpend: number; optimizedSpend: number }, index: number) => (
           <ToolAuditCard key={index} tool={tool} />
         ))}
       </div>
 
       <div className="bg-blue-50 dark:bg-blue-950/30 rounded-xl p-8 text-center mt-12">
         <h3 className="text-xl font-bold text-blue-900 dark:text-blue-200 mb-3">Want to audit your own stack?</h3>
-        <p className="text-blue-800 dark:text-blue-300 mb-6">Takes 2 minutes. See exactly where you're overpaying for AI tools.</p>
+        <p className="text-blue-800 dark:text-blue-300 mb-6">Takes 2 minutes. See exactly where you&apos;re overpaying for AI tools.</p>
         <Button onClick={() => window.location.href = '/'}>Start Free Audit</Button>
       </div>
     </div>

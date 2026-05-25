@@ -16,7 +16,12 @@ interface SpendDistributionChartProps {
 
 const COLORS = ['#8b5cf6', '#10b981', '#3b82f6', '#f43f5e', '#f59e0b', '#06b6d4', '#d946ef', '#14b8a6'];
 
-const CustomTooltip = ({ active, payload }: any) => {
+interface CustomTooltipProps {
+  active?: boolean;
+  payload?: Array<{ name: string; value: number }>;
+}
+
+const CustomTooltip = ({ active, payload }: CustomTooltipProps) => {
   if (active && payload && payload.length) {
     const data = payload[0];
     return (

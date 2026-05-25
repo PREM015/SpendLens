@@ -19,8 +19,9 @@ export function useLead() {
       }
 
       return await res.json();
-    } catch (err: any) {
-      setError(err.message || 'An error occurred');
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'An error occurred';
+      setError(message);
       return null;
     } finally {
       setIsLoading(false);

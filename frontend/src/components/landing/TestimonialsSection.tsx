@@ -68,7 +68,7 @@ export function TestimonialsSection() {
             Trusted by Leaders
           </span>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white mb-4">
-            Don't just take our word for it
+            Don&apos;t just take our word for it
           </h2>
           <p className="text-zinc-600 dark:text-zinc-500 max-w-2xl mx-auto">
             Engineering and finance leaders are using SpendLens to stop AI budget leakage.

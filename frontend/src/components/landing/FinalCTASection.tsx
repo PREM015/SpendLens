@@ -3,7 +3,6 @@
 import React from 'react';
 import { motion, useInView } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
-import { APP_NAME } from '@/utils/constants';
 import { BackgroundBeams } from '@/components/ui/BackgroundBeams';
 import Link from 'next/link';
 
@@ -56,7 +55,7 @@ export function FinalCTASection() {
           transition={{ delay: 0.3, duration: 0.5 }}
           className="text-zinc-600 dark:text-zinc-400 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          Get a complete breakdown of your stack's efficiency in 90 seconds. No credit card, no login required.
+          Get a complete breakdown of your stack&apos;s efficiency in 90 seconds. No credit card, no login required.
         </motion.p>
 
         <motion.div

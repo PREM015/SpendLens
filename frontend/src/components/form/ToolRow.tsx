@@ -13,7 +13,7 @@ import { Trash2 } from 'lucide-react';
 export function ToolRow({ toolIndex, data }: { toolIndex: number; data: ToolRowType }) {
   const { updateToolRow, removeToolRow } = useFormStore();
 
-  const handleUpdate = (field: keyof ToolRowType, value: any) => {
+  const handleUpdate = (field: keyof ToolRowType, value: string | number | boolean | null) => {
     updateToolRow(data.id, { [field]: value });
   };
 

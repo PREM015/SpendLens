@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useLayoutEffect } from 'react';
 import { LanguageCode, translations } from '@/utils/translations';
 
 type TranslationKey = string; // Using string path like 'nav.howItWorks'
@@ -17,8 +17,11 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<LanguageCode>('en');
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
     const saved = localStorage.getItem('spendlens-language') as LanguageCode;
     if (saved && translations[saved]) {
       setLanguageState(saved);
@@ -30,31 +33,31 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('spendlens-language', lang);
   };
 
-  const t = (key: TranslationKey): string => {
-    if (!mounted) return ''; // Prevent hydration mismatch on first render
-    const keys = key.split('.');
-    let result: any = translations[language];
+  const t = (keyRecord<string, unknown> = translations[language];
     for (const k of keys) {
-      if (result[k] === undefined) {
+      if (!result || typeof result !== 'object' || !(k in result)) {
         // Fallback to english if not found
-        let fallback: any = translations['en'];
+        let fallback: Record<string, unknown> = translations['en'];
         for (const fb of keys) {
-          if (fallback[fb] === undefined) return key;
-          fallback = fallback[fb];
+          if (!fallback || typeof fallback !== 'object' || !(fb in fallback)) return key;
+          fallback = fallback[fb] as Record<string, unknown>;
         }
-        return fallback;
+        return String(fallback);
       }
-      result = result[k];
+      result = result[k] as Record<string, unknown>;
     }
-    return result as string;
+    return String(result);
   };
 
   // Pre-render pass with default english if not mounted to match server
   const serverT = (key: TranslationKey): string => {
     const keys = key.split('.');
-    let result: any = translations['en'];
+    let result: Record<string, unknown> = translations['en'];
     for (const k of keys) {
-      if (result[k] === undefined) return key;
+      if (!result || typeof result !== 'object' || !(k in result)) return key;
+      result = result[k] as Record<string, unknown>;
+    }
+    return String(result)efined) return key;
       result = result[k];
     }
     return result as string;

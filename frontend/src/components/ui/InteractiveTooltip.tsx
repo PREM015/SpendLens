@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 interface InteractiveTooltipProps {
   active?: boolean;
-  payload?: any[];
+  payload?: Array<{name: string; value: number; color: string}>;
   label?: string;
   currencyPrefix?: string;
 }

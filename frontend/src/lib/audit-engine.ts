@@ -1,6 +1,6 @@
-import type { FormState, ToolEntry, ToolId } from '@/types/form';
+import type { FormState, ToolEntry } from '@/types/form';
 import type { AuditResult, ToolAuditResult } from '@/types/audit';
-import { PRICING, getPlanPrice, getToolDisplayName } from './pricing-data';
+import { getPlanPrice, getToolDisplayName } from './pricing-data';
 
 /**
  * Core audit engine. Uses hardcoded rules (NOT AI) to produce savings recommendations.
@@ -12,16 +12,16 @@ import { PRICING, getPlanPrice, getToolDisplayName } from './pricing-data';
  * Cross-tool analysis:
  *   - Duplicate detection for overlapping coding-assistant subscriptions.
  */
-export function runAudit(form: FormState): AuditResult {
+export function runAudit(formData: FormState): AuditResult {
   const toolResults: ToolAuditResult[] = [];
 
-  for (const entry of form.tools) {
+  for (const entry of formData.tools) {
     const result = auditSingleTool(entry, form);
     toolResults.push(result);
   }
 
   // Cross-tool: check for duplicate coding assistants
-  const duplicateResults = checkDuplicates(form, toolResults);
+  const duplicateResults = checkDuplicates(formData, toolResults);
   // Merge duplicate recommendations (overwrite where applicable)
   for (const dup of duplicateResults) {
     const idx = toolResults.findIndex((r) => r.tool === dup.tool);
@@ -31,7 +31,7 @@ export function runAudit(form: FormState): AuditResult {
   }
 
   // Credits check: if total spend > $500/mo, flag everything for Credex
-  const totalMonthlySpend = form.tools.reduce((sum, t) => sum + t.monthlySpend, 0);
+  const totalMonthlySpend = formData.tools.reduce((sum, t) => sum + t.monthlySpend, 0);
   if (totalMonthlySpend > 500) {
     for (const result of toolResults) {
       if (result.flag !== 'savings') {
