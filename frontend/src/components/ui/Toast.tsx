@@ -51,10 +51,10 @@ function ToastItem({
       )}
     >
       <Icon className={cn('h-5 w-5 flex-shrink-0', config.iconColor)} />
-      <p className="text-sm text-white flex-1">{message}</p>
+      <p className="text-sm text-zinc-900 dark:text-white flex-1">{message}</p>
       <button
         onClick={() => removeToast(id)}
-        className="rounded-lg p-1 text-slate-400 hover:text-white transition-colors cursor-pointer"
+        className="rounded-lg p-1 text-zinc-600 dark:text-slate-400 hover:text-zinc-900 dark:hover:text-zinc-900 dark:text-white transition-colors cursor-pointer"
         aria-label="Dismiss"
       >
         <X className="h-4 w-4" />

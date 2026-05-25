@@ -2,89 +2,30 @@
 
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
-import { ChevronDown, Plus, Minus } from 'lucide-react';
+import { Plus, Minus } from 'lucide-react';
 
 const faqs = [
   {
-    question: 'Is SpendLens really free?',
-    answer:
-      'Yes, 100% free — forever. SpendLens is a free tool built by Credex. There are no paywalls, no trials, and no credit card required. We built it to help startups identify AI waste quickly.',
+    q: 'Is SpendLens really free?',
+    a: 'Yes, 100% free — forever. SpendLens is a free tool built by Credex. There are no paywalls, no trials, and no credit card required. We built it to help startups identify AI waste quickly.',
   },
   {
-    question: 'How accurate is the audit?',
-    answer:
-      'Our engine uses real-time pricing data from every major AI tool vendor. Savings estimates are based on actual plan costs, your seat count, and usage patterns. Most users find the estimates within 5-10% of actual savings.',
+    q: 'How accurate is the audit?',
+    a: 'Our engine uses real-time pricing data from every major AI tool vendor. Savings estimates are based on actual plan costs, your seat count, and usage patterns. Most users find the estimates within 5-10% of actual savings.',
   },
   {
-    question: 'What data do you collect?',
-    answer:
-      'We only collect the tool names, plan tiers, seat counts, and monthly costs you enter into the form. We never access your AI tool accounts, conversations, or usage data. Your audit data is never shared or sold.',
+    q: 'What data do you collect?',
+    a: 'We only collect the tool names, plan tiers, seat counts, and monthly costs you enter into the form. We never access your AI tool accounts, conversations, or usage data. Your audit data is never shared or sold.',
   },
   {
-    question: 'How does Credex make money?',
-    answer:
-      'Credex is a SaaS spend management platform. SpendLens helps startups discover waste — and if savings are significant, we offer optional managed optimization through Credex. You\'re never pressured to convert.',
+    q: 'How does Credex make money?',
+    a: 'Credex is a SaaS spend management platform. SpendLens helps startups discover waste — and if savings are significant, we offer optional managed optimization through Credex. You\'re never pressured to convert.',
   },
   {
-    question: 'Can I share my audit results?',
-    answer:
-      'Absolutely! Every audit generates a unique shareable link. Send it to your CTO, finance team, or investors to show exactly where AI budget is being wasted and how much you could save.',
+    q: 'Can I share my audit results?',
+    a: 'Absolutely! Every audit generates a unique shareable link. Send it to your CTO, finance team, or investors to show exactly where AI budget is being wasted and how much you could save.',
   },
 ];
-
-function FAQItem({
-  faq,
-  isOpen,
-  onToggle,
-  index,
-}: {
-  faq: { question: string; answer: string };
-  isOpen: boolean;
-  onToggle: () => void;
-  index: number;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.05 }}
-      className="group"
-    >
-      <button
-        onClick={onToggle}
-        className="flex w-full items-center justify-between gap-4 rounded-xl px-6 py-5 text-left transition-colors duration-200 hover:bg-zinc-900/50 cursor-pointer"
-        aria-expanded={isOpen}
-      >
-        <span className="text-base font-medium text-zinc-200 sm:text-lg">
-          {faq.question}
-        </span>
-        <div className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${isOpen ? 'border-violet-500/40 bg-violet-500/10' : 'border-zinc-800 bg-zinc-900'}`}>
-          {isOpen ? (
-            <Minus className="h-3 w-3 text-violet-400" />
-          ) : (
-            <Plus className="h-3 w-3 text-zinc-500" />
-          )}
-        </div>
-      </button>
-
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] as const }}
-            className="overflow-hidden"
-          >
-            <p className="px-6 pb-6 text-sm leading-relaxed text-zinc-500 sm:text-base">
-              {faq.answer}
-            </p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
-  );
-}
 
 export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -112,28 +53,60 @@ export function FAQSection() {
           <span className="mb-4 inline-block text-sm font-medium uppercase tracking-widest text-violet-400">
             Questions
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white">
             Frequently Asked Questions
           </h2>
         </motion.div>
 
-        {/* Accordion */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.15, duration: 0.5 }}
-          className="rounded-2xl border border-zinc-800 bg-zinc-950/50 divide-y divide-zinc-800/50 backdrop-blur-sm overflow-hidden"
-        >
-          {faqs.map((faq, idx) => (
-            <FAQItem
-              key={idx}
-              faq={faq}
-              index={idx}
-              isOpen={openIndex === idx}
-              onToggle={() => setOpenIndex(openIndex === idx ? null : idx)}
-            />
-          ))}
-        </motion.div>
+        {/* Accordion List */}
+        <div className="rounded-3xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-950/40 backdrop-blur-md shadow-2xl divide-y divide-zinc-200 dark:divide-zinc-800/60">
+          {faqs.map((faq, i) => {
+            const isOpen = openIndex === i;
+            return (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: i * 0.05 + 0.2, duration: 0.5 }}
+                className="group"
+              >
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  className="flex w-full items-center justify-between py-6 px-6 sm:px-8 text-left transition-colors duration-300 hover:bg-zinc-100 dark:hover:bg-zinc-900/50"
+                >
+                  <span className={`text-lg font-medium transition-colors duration-300 ${isOpen ? 'text-violet-400' : 'text-zinc-600 dark:text-zinc-200 group-hover:text-zinc-900 dark:group-hover:text-zinc-900 dark:text-white'}`}>
+                    {faq.q}
+                  </span>
+                  <div
+                    className={`ml-6 shrink-0 rounded-full border p-1.5 transition-all duration-300 ${
+                      isOpen
+                        ? 'border-violet-500/50 bg-violet-500/10 text-violet-400'
+                        : 'border-zinc-300 dark:border-zinc-700 bg-transparent text-zinc-600 dark:text-zinc-500 group-hover:border-zinc-400 dark:group-hover:border-zinc-500 group-hover:text-zinc-800 dark:group-hover:text-zinc-300'
+                    }`}
+                  >
+                    {isOpen ? <Minus size={18} /> : <Plus size={18} />}
+                  </div>
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pb-6 px-6 sm:px-8 text-base leading-relaxed text-zinc-600 dark:text-zinc-400 font-medium">
+                        {faq.a}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

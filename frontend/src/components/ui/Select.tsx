@@ -54,7 +54,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             ref={ref}
             id={selectId}
             className={cn(
-              'w-full appearance-none rounded-xl border bg-slate-800/50 px-4 py-2.5 pr-10 text-sm text-white',
+              'w-full appearance-none rounded-xl border bg-slate-800/50 px-4 py-2.5 pr-10 text-sm text-zinc-900 dark:text-white',
               'transition-all duration-200 cursor-pointer',
               'focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500/50',
               'disabled:opacity-50 disabled:cursor-not-allowed',
@@ -74,7 +74,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
                 key={opt.value}
                 value={opt.value}
                 disabled={opt.disabled}
-                className="bg-slate-900 text-white"
+                className="bg-slate-900 text-zinc-900 dark:text-white"
               >
                 {opt.label}
               </option>

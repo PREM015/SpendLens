@@ -33,7 +33,7 @@ export function SpendInputForm({ onSubmit, isLoading }: { onSubmit: () => void; 
           <div className="flex items-center gap-2 bg-slate-800/60 border border-slate-700/50 backdrop-blur-xl rounded-full px-4 py-2">
             <DollarSign size={14} className="text-violet-400" />
             <span className="text-sm text-slate-400">Monthly total:</span>
-            <span className="text-sm font-semibold text-white tabular-nums">
+            <span className="text-sm font-semibold text-zinc-900 dark:text-white tabular-nums">
               {formatCurrency(runningTotal, { decimals: 0 })}
             </span>
             <span className="text-xs text-slate-500">/mo</span>

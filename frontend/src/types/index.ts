@@ -51,6 +51,8 @@ export interface AuditResult {
   totalOptimizedSpend?: number;
   monthly_savings: number;
   annual_savings: number;
+  savings_flag?: 'high' | 'low' | 'optimal';
+  ai_summary?: string;
   tools: ToolAuditResult[];
   credexEligible?: boolean;
 }

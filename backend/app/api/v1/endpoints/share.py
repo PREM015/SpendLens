@@ -1,8 +1,10 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
+from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.v1.schemas.audit import AuditResult
 from app.api.v1.schemas.share import ShareResponse
-from app.api.v1.endpoints.audit import AUDITS_DB
+from app.db.session import get_db
+from app.repositories.audit_repo import get_audit
 
 router = APIRouter()
 
@@ -11,10 +13,12 @@ class GenericResponse(BaseModel):
     data: ShareResponse
 
 @router.get("/{token}", response_model=GenericResponse)
-async def get_audit(token: str):
-    audit_result = AUDITS_DB.get(token)
-    if not audit_result:
+async def get_audit_endpoint(token: str, db: AsyncSession = Depends(get_db)):
+    audit_data = await get_audit(db, token)
+    if not audit_data:
         raise HTTPException(status_code=404, detail="Audit not found")
+        
+    audit_result = AuditResult(**audit_data)
         
     return GenericResponse(
         success=True,

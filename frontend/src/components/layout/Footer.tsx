@@ -32,13 +32,13 @@ export function Footer() {
           <div className="space-y-4">
             <h4 className="text-xs font-semibold uppercase tracking-widest text-zinc-400">Product</h4>
             <nav className="flex flex-col gap-3">
-              <Link href="/audit" className="text-sm text-zinc-500 hover:text-white transition-colors duration-200">
+              <Link href="/audit" className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors duration-200">
                 Start Audit
               </Link>
-              <Link href="/#how-it-works" className="text-sm text-zinc-500 hover:text-white transition-colors duration-200">
+              <Link href="/#how-it-works" className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors duration-200">
                 How It Works
               </Link>
-              <Link href="/#faq" className="text-sm text-zinc-500 hover:text-white transition-colors duration-200">
+              <Link href="/#faq" className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors duration-200">
                 FAQ
               </Link>
             </nav>

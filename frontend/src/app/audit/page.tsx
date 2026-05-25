@@ -85,10 +85,10 @@ export default function AuditPage() {
               <Layers size={20} className="text-violet-400" />
             </div>
             <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-white">
+              <h1 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white">
                 Enter Your AI Stack
               </h1>
-              <p className="text-sm text-slate-400 mt-0.5">
+              <p className="text-sm text-zinc-600 dark:text-slate-400 mt-0.5">
                 Add the tools your team uses and we&apos;ll find savings opportunities
               </p>
             </div>
@@ -100,7 +100,7 @@ export default function AuditPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="bg-slate-900/50 border border-slate-700/40 backdrop-blur-xl rounded-2xl p-6 sm:p-8 shadow-2xl shadow-black/20"
+          className="bg-white dark:bg-slate-900/50 border border-zinc-200 dark:border-slate-700/40 backdrop-blur-xl rounded-2xl p-6 sm:p-8 shadow-2xl shadow-black/20"
         >
           <SpendInputForm onSubmit={handleSubmit} isLoading={isLoading} />
         </motion.div>
@@ -116,7 +116,7 @@ export default function AuditPage() {
             className="fixed inset-0 z-50 flex items-center justify-center"
           >
             {/* Backdrop */}
-            <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-md" />
+            <div className="absolute inset-0 bg-white dark:bg-black/80 dark:bg-slate-950/80 backdrop-blur-md" />
 
             {/* Loading card */}
             <motion.div
@@ -124,7 +124,7 @@ export default function AuditPage() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className="relative bg-slate-900/90 border border-slate-700/50 backdrop-blur-xl rounded-2xl p-10 text-center shadow-2xl"
+              className="relative bg-white dark:bg-slate-900/90 border border-zinc-200 dark:border-slate-700/50 backdrop-blur-xl rounded-2xl p-10 text-center shadow-2xl"
             >
               {/* Glow behind spinner */}
               <div className="absolute inset-0 rounded-2xl bg-violet-500/5 blur-xl" />
@@ -139,11 +139,11 @@ export default function AuditPage() {
                 <motion.p
                   animate={{ opacity: [0.5, 1, 0.5] }}
                   transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                  className="text-lg font-medium text-white"
+                  className="text-lg font-medium text-zinc-900 dark:text-white"
                 >
                   Analyzing your spend...
                 </motion.p>
-                <p className="text-sm text-slate-400 mt-2">
+                <p className="text-sm text-zinc-600 dark:text-slate-400 mt-2">
                   Our AI is finding the best optimization opportunities
                 </p>
               </div>

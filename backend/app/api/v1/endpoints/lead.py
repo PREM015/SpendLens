@@ -1,17 +1,31 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
+from sqlalchemy.ext.asyncio import AsyncSession
 from app.api.v1.schemas.lead import LeadFormData, LeadResponse
-from app.api.v1.endpoints.audit import AUDITS_DB
+from app.api.v1.schemas.audit import AuditResult
 from app.services.email.email_service import send_audit_email
+from app.db.session import get_db
+from app.repositories.audit_repo import get_audit
+from app.repositories.lead_repo import create_lead
 
 router = APIRouter()
 
 @router.post("", response_model=LeadResponse)
-async def capture_lead(lead_data: LeadFormData):
-    audit_result = AUDITS_DB.get(lead_data.audit_id)
-    if not audit_result:
+async def capture_lead(lead_data: LeadFormData, db: AsyncSession = Depends(get_db)):
+    audit_data = await get_audit(db, lead_data.audit_id)
+    if not audit_data:
         raise HTTPException(status_code=404, detail="Audit not found")
         
-    # In a real app, save lead info to DB
+    audit_result = AuditResult(**audit_data)
+        
+    # Save lead info to DB
+    await create_lead(
+        db=db,
+        audit_id=lead_data.audit_id,
+        email=lead_data.email,
+        company=lead_data.company,
+        role=lead_data.role,
+        team_size=lead_data.team_size
+    )
     
     # Send email
     success = await send_audit_email(

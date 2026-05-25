@@ -11,7 +11,7 @@ APP_URL = os.getenv("NEXT_PUBLIC_APP_URL", "https://spendlens.dev")
 
 def build_email_html(audit: AuditResult, audit_id: str, share_url: str) -> str:
     tool_rows = []
-    for r in audit.tool_results:
+    for r in audit.tools:
         name = get_tool_display_name(r.tool)
         if r.flag == 'optimal':
             flag_color = '#22c55e'
@@ -69,7 +69,7 @@ def build_email_html(audit: AuditResult, audit_id: str, share_url: str) -> str:
       <p style="margin: 0; color: #374151; font-size: 14px; line-height: 1.6;">{audit.ai_summary}</p>
     </div>"""
 
-    savings_color = '#16a34a' if audit.total_annual_savings > 0 else '#6b7280'
+    savings_color = '#16a34a' if audit.annual_savings > 0 else '#6b7280'
 
     html = f"""
 <!DOCTYPE html>
@@ -91,10 +91,10 @@ def build_email_html(audit: AuditResult, audit_id: str, share_url: str) -> str:
       <div style="text-align: center;">
         <p style="margin: 0; color: #6b7280; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;">Potential Annual Savings</p>
         <p style="margin: 8px 0 0; font-size: 36px; font-weight: 700; color: {savings_color};">
-          ${audit.total_annual_savings:,.2f}
+          ${audit.annual_savings:,.2f}
         </p>
         <p style="margin: 4px 0 0; color: #6b7280; font-size: 14px;">
-          (${audit.total_monthly_savings:,.2f}/month)
+          (${audit.monthly_savings:,.2f}/month)
         </p>
       </div>
     </div>
@@ -156,7 +156,7 @@ async def send_audit_email(to_email: str, audit: AuditResult, audit_id: str) -> 
         response = resend.Emails.send({
             "from": FROM_EMAIL,
             "to": to_email,
-            "subject": f"Your SpendLens Audit: ${audit.total_annual_savings:,.2f} in potential annual savings",
+            "subject": f"Your SpendLens Audit: ${audit.annual_savings:,.2f} in potential annual savings",
             "html": html_content
         })
         

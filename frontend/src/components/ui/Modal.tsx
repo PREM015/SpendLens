@@ -68,7 +68,7 @@ export function Modal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+            className="absolute inset-0 bg-white dark:bg-black/70 backdrop-blur-sm"
             onClick={closeOnOverlay ? onClose : undefined}
             aria-hidden="true"
           />
@@ -92,11 +92,11 @@ export function Modal({
             {(title || true) && (
               <div className="flex items-center justify-between mb-4">
                 {title && (
-                  <h2 className="text-lg font-semibold text-white">{title}</h2>
+                  <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">{title}</h2>
                 )}
                 <button
                   onClick={onClose}
-                  className="ml-auto rounded-lg p-1.5 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+                  className="ml-auto rounded-lg p-1.5 text-slate-400 hover:text-zinc-900 dark:text-white hover:bg-slate-800 transition-colors cursor-pointer"
                   aria-label="Close"
                 >
                   <X className="h-5 w-5" />

@@ -18,7 +18,7 @@ export function PlanSelector({ toolId, value, onChange }: PlanSelectorProps) {
 
   return (
     <div className="flex flex-col">
-      <label className="text-sm font-medium text-slate-300 mb-1">Plan</label>
+      <label className="text-sm font-medium text-zinc-600 dark:text-slate-300 mb-1">Plan</label>
       <Select
         value={value}
         onChange={(e) => onChange(e.target.value)}

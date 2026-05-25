@@ -1,0 +1,38 @@
+@media print {
+  /* Hide UI elements not meant for the report */
+  header, footer, nav, button, .hidden-print {
+    display: none !important;
+  }
+
+  /* Reset background and colors for printing */
+  body, html {
+    background-color: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Force dark theme colors if exporting dark mode report (html2canvas captures exactly what's on screen) */
+  #audit-dashboard-content {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    padding: 2rem !important;
+  }
+
+  /* Prevent page breaks inside cards */
+  .break-inside-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Hide scrollbars */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Ensure charts don't break across pages */
+  .recharts-wrapper {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

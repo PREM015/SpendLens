@@ -93,45 +93,49 @@ export function HowItWorksSection() {
           <span className="mb-4 inline-block text-sm font-medium uppercase tracking-widest text-violet-400">
             Simple Process
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white">
             How It Works
           </h2>
         </motion.div>
 
-        {/* Cards */}
-        <div className="grid gap-6 md:gap-8 md:grid-cols-3">
+        {/* Equal Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
           {steps.map((step, i) => {
             const Icon = step.icon;
+            const flexDir = 'flex-col';
+            
             return (
               <motion.div
                 key={step.number}
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: i * 0.15, duration: 0.5 }}
+                transition={{ delay: i * 0.15, duration: 0.6, ease: "easeOut" }}
+                className="h-full"
               >
-                <TiltCard>
-                  <div className="group relative rounded-2xl border border-zinc-800 bg-zinc-950/80 p-8 backdrop-blur-sm transition-colors duration-300 hover:border-zinc-700 h-full">
-                    {/* Spotlight on hover */}
-                    <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-violet-600/5 to-transparent" />
+                <TiltCard className="h-full">
+                  <div className={`group relative rounded-3xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-950/90 p-8 sm:p-10 backdrop-blur-md transition-all duration-500 hover:border-violet-500/50 dark:hover:bg-zinc-900/80 hover:bg-zinc-100 h-full flex ${flexDir} gap-6 overflow-hidden`}>
+                    
+                    {/* Glowing background blob on hover */}
+                    <div className="absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-r from-violet-600/10 via-fuchsia-600/10 to-violet-600/10 blur-2xl" />
+                    
+                    {/* Animated corner border beam */}
+                    <div className="absolute top-0 left-0 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-0 group-hover:opacity-100 transform -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-in-out" />
 
-                    <div className="relative">
-                      {/* Number */}
-                      <span className={`mb-6 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br ${step.gradient} text-sm font-bold text-white shadow-lg`}>
+                    <div className="relative z-10 shrink-0">
+                      <div className={`relative flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${step.gradient} shadow-2xl overflow-hidden`}>
+                        <div className="absolute inset-0 bg-white dark:bg-black/20" />
+                        <Icon className="relative z-10 h-8 w-8 text-zinc-900 dark:text-white drop-shadow-md" />
+                      </div>
+                      <span className="absolute -bottom-3 -right-3 text-6xl font-black text-zinc-900 dark:text-white/5 select-none pointer-events-none">
                         {step.number}
                       </span>
+                    </div>
 
-                      {/* Icon */}
-                      <div className="mb-5">
-                        <Icon className="h-6 w-6 text-zinc-500 transition-colors duration-300 group-hover:text-violet-400" />
-                      </div>
-
-                      {/* Title */}
-                      <h3 className="mb-3 text-xl font-semibold text-white">
+                    <div className="relative z-10 flex-1">
+                      <h3 className="mb-3 text-2xl font-bold text-zinc-900 dark:text-white tracking-tight">
                         {step.title}
                       </h3>
-
-                      {/* Description */}
-                      <p className="text-sm leading-relaxed text-zinc-500">
+                      <p className="text-base leading-relaxed text-zinc-600 dark:text-zinc-400 font-medium">
                         {step.description}
                       </p>
                     </div>

@@ -7,16 +7,16 @@ from app.services.pricing.pricing_loader import get_tool_display_name
 logger = logging.getLogger(__name__)
 
 def build_template_summary(audit: AuditResult) -> str:
-    savings_tools = [r for r in audit.tool_results if r.monthly_savings > 0]
-    optimal_tools = [r for r in audit.tool_results if r.flag == 'optimal']
+    savings_tools = [r for r in audit.tools if r.monthly_savings > 0]
+    optimal_tools = [r for r in audit.tools if r.flag == 'optimal']
     
     if not savings_tools:
-        return f"Your current AI tool stack is well-optimized. All {len(audit.tool_results)} tools are appropriately matched to your team size and use case. No immediate changes are recommended. Consider revisiting this audit quarterly as your team grows or as vendors update their pricing tiers."
+        return f"Your current AI tool stack is well-optimized. All {len(audit.tools)} tools are appropriately matched to your team size and use case. No immediate changes are recommended. Consider revisiting this audit quarterly as your team grows or as vendors update their pricing tiers."
         
     top_saving = sorted(savings_tools, key=lambda x: x.monthly_savings, reverse=True)[0]
     top_tool_name = get_tool_display_name(top_saving.tool)
     
-    summary = f"Your audit identified ${audit.total_monthly_savings:,.2f} in potential monthly savings (${audit.total_annual_savings:,.2f} annually) across {len(savings_tools)} of your {len(audit.tool_results)} AI tool subscriptions."
+    summary = f"Your audit identified ${audit.monthly_savings:,.2f} in potential monthly savings (${audit.annual_savings:,.2f} annually) across {len(savings_tools)} of your {len(audit.tools)} AI tool subscriptions."
     summary += f" The largest opportunity is {top_tool_name}: {top_saving.recommended_action.lower()}, which alone saves ${top_saving.monthly_savings}/mo."
     
     if optimal_tools:
@@ -40,17 +40,17 @@ async def generate_summary(audit: AuditResult, team_size: int, use_case: str) ->
         
         tool_breakdown = "\n".join([
             f"- {get_tool_display_name(r.tool)} ({r.current_plan}): {r.recommended_action}. Monthly savings: ${r.monthly_savings}"
-            for r in audit.tool_results
+            for r in audit.tools
         ])
         
         user_message = f"""
 Audit Summary Data:
 - Team size: {team_size}
 - Primary use case: {use_case}
-- Total monthly savings identified: ${audit.total_monthly_savings}
-- Total annual savings identified: ${audit.total_annual_savings}
+- Total monthly savings identified: ${audit.monthly_savings}
+- Total annual savings identified: ${audit.annual_savings}
 - Savings level: {audit.savings_flag}
-- Number of tools audited: {len(audit.tool_results)}
+- Number of tools audited: {len(audit.tools)}
 
 Per-tool breakdown:
 {tool_breakdown}

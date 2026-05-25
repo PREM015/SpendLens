@@ -46,26 +46,26 @@ export function CredexCTABlock({ savings }: { savings: number }) {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.7, type: 'spring', damping: 15 }}
-          className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm mb-5"
+          className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white/10 dark:bg-white/10 backdrop-blur-sm mb-5"
         >
-          <Zap size={24} className="text-white" />
+          <Zap size={24} className="text-zinc-900 dark:text-white" />
         </motion.div>
 
-        <h3 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+        <h3 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-3">
           Claim your{' '}
-          <span className="text-violet-200 tabular-nums">
+          <span className="text-violet-600 dark:text-violet-200 tabular-nums">
             {formatCurrency(savings, { decimals: 0 })}
           </span>
           /mo savings
         </h3>
 
-        <p className="text-violet-200/70 mb-8 max-w-lg mx-auto text-sm sm:text-base leading-relaxed">
+        <p className="text-violet-700 dark:text-violet-200/70 mb-8 max-w-lg mx-auto text-sm sm:text-base leading-relaxed">
           Credex can automatically negotiate and procure these tools for you at the optimal pricing tier, saving you time and money.
         </p>
 
         <Button
           size="lg"
-          className="bg-white text-violet-900 hover:bg-violet-50 border-none font-bold px-10 py-4 rounded-full shadow-xl shadow-black/20 hover:shadow-2xl hover:shadow-black/30 transition-all duration-300 text-base"
+          className="bg-zinc-900 dark:bg-white text-white dark:text-violet-900 hover:bg-zinc-800 dark:hover:bg-violet-50 border-none font-bold px-10 py-4 rounded-full shadow-xl shadow-black/20 dark:shadow-black/20 hover:shadow-2xl hover:shadow-black/30 transition-all duration-300 text-base"
           onClick={() => window.open('https://credex.co', '_blank')}
         >
           Get Started with Credex

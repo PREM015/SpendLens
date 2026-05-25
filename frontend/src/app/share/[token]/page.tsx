@@ -5,7 +5,7 @@ import { PublicAuditView } from '@/components/share/PublicAuditView';
 
 export default function SharePage({ params }: { params: { token: string } }) {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-black">
       <PublicAuditView token={params.token} />
     </div>
   );

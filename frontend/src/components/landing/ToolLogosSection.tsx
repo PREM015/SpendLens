@@ -37,10 +37,10 @@ export function ToolLogosSection() {
           <span className="mb-4 inline-block text-sm font-medium uppercase tracking-widest text-violet-400">
             Integrations
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white mb-4">
             Audit 8+ AI Tools
           </h2>
-          <p className="text-zinc-500 max-w-lg mx-auto">
+          <p className="text-zinc-600 dark:text-zinc-500 max-w-lg mx-auto">
             We support all major AI tools and APIs your team is using.
           </p>
         </motion.div>
@@ -53,16 +53,16 @@ export function ToolLogosSection() {
         transition={{ delay: 0.3, duration: 0.6 }}
         className="relative"
       >
-        {/* Fade masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+        {/* Deep Fade masks */}
+        <div className="absolute left-0 top-0 bottom-0 w-40 bg-gradient-to-r from-white dark:from-black via-white/80 dark:via-black/80 to-transparent dark:to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-40 bg-gradient-to-l from-white dark:from-black via-white/80 dark:via-black/80 to-transparent dark:to-transparent z-10 pointer-events-none" />
 
-        <div className="flex overflow-hidden">
+        <div className="flex overflow-hidden py-4">
           <div className="marquee-track flex shrink-0 gap-4">
             {marqueeTools.map((tool, i) => (
               <div
                 key={`${tool.name}-${i}`}
-                className="group flex items-center gap-3 rounded-xl border border-zinc-800/80 bg-zinc-950/50 px-6 py-4 backdrop-blur-sm transition-all duration-300 hover:border-zinc-700 hover:bg-zinc-900/60 shrink-0"
+                className="group flex items-center gap-3 rounded-2xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-950/40 px-7 py-5 backdrop-blur-md transition-all duration-500 hover:border-zinc-300 dark:hover:border-zinc-600 hover:bg-zinc-100 dark:hover:bg-zinc-900/80 hover:scale-[1.02] hover:-translate-y-1 shadow-lg hover:shadow-2xl shrink-0"
               >
                 {/* Colored dot */}
                 <div
@@ -78,7 +78,7 @@ export function ToolLogosSection() {
                     (e.target as HTMLElement).style.boxShadow = `0 0 0 0 ${tool.color}00`;
                   }}
                 />
-                <span className="text-sm font-medium text-zinc-400 whitespace-nowrap group-hover:text-white transition-colors duration-300">
+                <span className="text-sm font-medium text-zinc-600 dark:text-zinc-400 whitespace-nowrap group-hover:text-zinc-900 dark:group-hover:text-zinc-900 dark:text-white transition-colors duration-300">
                   {tool.name}
                 </span>
               </div>

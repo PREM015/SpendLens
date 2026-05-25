@@ -8,6 +8,14 @@ export function useAiSummary() {
   const fetchSummary = async (auditData: any) => {
     setIsLoading(true);
     setError(null);
+
+    // Bypass API if a mock/pre-generated summary is provided
+    if (auditData.ai_summary) {
+      setSummary(auditData.ai_summary);
+      setIsLoading(false);
+      return auditData.ai_summary;
+    }
+
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/v1/summary`, {
         method: 'POST',

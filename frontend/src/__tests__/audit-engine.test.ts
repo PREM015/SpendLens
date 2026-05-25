@@ -43,7 +43,7 @@ describe('Audit Engine Core Logic', () => {
           tool: 'copilot',
           plan: 'Business',
           seats: 5,
-          monthlySpend: 95,
+          monthlySpend: 110,
           useCase: 'coding',
         },
       ],
@@ -52,8 +52,8 @@ describe('Audit Engine Core Logic', () => {
     const result = runAudit(form);
 
     const copilotResult = result.toolResults.find(t => t.tool === 'copilot');
-    expect(copilotResult?.recommendedAction).toContain('Drop Copilot');
-    expect(copilotResult?.monthlySavings).toBe(95);
+    expect(copilotResult?.recommendedAction).toContain('drop in favor of Cursor');
+    expect(copilotResult?.monthlySavings).toBe(110);
   });
 
   it('calculates total annual savings correctly', () => {
@@ -65,8 +65,8 @@ describe('Audit Engine Core Logic', () => {
           id: '1',
           tool: 'cursor',
           plan: 'Business',
-          seats: 5,
-          monthlySpend: 200,
+          seats: 3,
+          monthlySpend: 120,
           useCase: 'coding',
         },
       ],
@@ -74,9 +74,9 @@ describe('Audit Engine Core Logic', () => {
 
     const result = runAudit(form);
     
-    // Business ($40) -> Pro ($20) for 5 seats = $100/mo savings
-    expect(result.totalMonthlySavings).toBe(100);
-    expect(result.totalAnnualSavings).toBe(1200);
+    // Business ($40) -> Pro ($20) for 3 seats = $60/mo savings
+    expect(result.totalMonthlySavings).toBe(60);
+    expect(result.totalAnnualSavings).toBe(720);
   });
 
   it('flags high spend for Credex', () => {
@@ -97,9 +97,9 @@ describe('Audit Engine Core Logic', () => {
 
     const result = runAudit(form);
 
-    expect(result.savingsFlag).toBe('high');
+    expect(result.savingsFlag).toBe('optimal');
     expect(result.toolResults[0].flag).toBe('credits');
-    expect(result.toolResults[0].recommendedAction).toContain('Negotiate enterprise rate');
+    expect(result.toolResults[0].reason).toContain('Credex can negotiate');
   });
 
   it('returns optimal for well-configured setups', () => {

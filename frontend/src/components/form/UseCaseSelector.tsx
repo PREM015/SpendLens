@@ -15,7 +15,7 @@ export function UseCaseSelector({ value, onChange }: UseCaseSelectorProps) {
 
   return (
     <div className="flex flex-col">
-      <label className="text-sm font-medium text-slate-300 mb-1">Primary Use Case</label>
+      <label className="text-sm font-medium text-zinc-600 dark:text-slate-300 mb-1">Primary Use Case</label>
       <Select 
         value={value} 
         onChange={(e) => onChange(e.target.value)}

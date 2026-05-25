@@ -23,6 +23,9 @@ services:
   backend:
     build:
       context: ./backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./backend:/app
     container_name: credex-backend
     restart: always
     ports:
@@ -39,6 +42,11 @@ services:
   frontend:
     build:
       context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
     container_name: credex-frontend
     restart: always
     ports:
