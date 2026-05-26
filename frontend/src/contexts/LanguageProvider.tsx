@@ -33,7 +33,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem('spendlens-language', lang);
   };
 
-  const t = (keyRecord<string, unknown> = translations[language];
+  const t = (key: TranslationKey): string => {
+    const keys = key.split('.');
+    let result: Record<string, unknown> = translations[language];
     for (const k of keys) {
       if (!result || typeof result !== 'object' || !(k in result)) {
         // Fallback to english if not found
@@ -57,10 +59,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       if (!result || typeof result !== 'object' || !(k in result)) return key;
       result = result[k] as Record<string, unknown>;
     }
-    return String(result)efined) return key;
-      result = result[k];
-    }
-    return result as string;
+    return String(result);
   };
 
   return (
