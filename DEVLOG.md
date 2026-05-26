@@ -36,9 +36,9 @@
 **Plan for tomorrow:** Submitting early.
 
 ## Day 6 — 2026-05-26
-**Hours worked:** 0
-**What I did:** Took the day off since the project was completed and submitted on Day 5.
-**What I learned:** N/A
+**Hours worked:** 1
+**What I did:** Debugged a GitHub Actions CI failure. The pipeline was failing during the `npm run lint` step. I documented the cause: Next.js has very strict ESLint rules that were catching some UI component anti-patterns (like calling `setState` synchronously inside a `useEffect` causing cascading renders, and using `Math.random()` during render which is impure). There were also a few unused TypeScript imports.
+**What I learned:** While Vercel successfully compiled and deployed the app, the explicit `npm run lint` script in GitHub Actions will hard-fail (exit code 1) if any strict React hook rules (like `exhaustive-deps` or `set-state-in-effect`) are violated. 
 **Blockers / what I'm stuck on:** N/A
 **Plan for tomorrow:** Rest.
 
