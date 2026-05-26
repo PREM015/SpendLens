@@ -12,8 +12,10 @@ if config.config_file_name is not None:
 
 target_metadata = Base.metadata
 
+import os
+
 def run_migrations_offline() -> None:
-    url = config.get_main_option("sqlalchemy.url")
+    url = os.environ.get("DATABASE_URL", config.get_main_option("sqlalchemy.url"))
     context.configure(
         url=url,
         target_metadata=target_metadata,
@@ -29,8 +31,15 @@ def do_run_migrations(connection: Connection) -> None:
         context.run_migrations()
 
 async def run_async_migrations() -> None:
+    section = config.get_section(config.config_ini_section, {})
+    
+    # Override with env var if present
+    db_url = os.environ.get("DATABASE_URL")
+    if db_url:
+        section["sqlalchemy.url"] = db_url
+
     connectable = async_engine_from_config(
-        config.get_section(config.config_ini_section, {}),
+        section,
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )
