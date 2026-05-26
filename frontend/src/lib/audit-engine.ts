@@ -1,4 +1,4 @@
-import type { FormState, ToolEntry } from '@/types/form';
+import type { FormState, ToolEntry, ToolId } from '@/types/form';
 import type { AuditResult, ToolAuditResult } from '@/types/audit';
 import { getPlanPrice, getToolDisplayName } from './pricing-data';
 
@@ -16,7 +16,7 @@ export function runAudit(formData: FormState): AuditResult {
   const toolResults: ToolAuditResult[] = [];
 
   for (const entry of formData.tools) {
-    const result = auditSingleTool(entry, form);
+    const result = auditSingleTool(entry, formData);
     toolResults.push(result);
   }
 

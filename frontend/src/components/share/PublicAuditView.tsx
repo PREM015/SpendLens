@@ -42,7 +42,7 @@ export function PublicAuditView({ token }: { token: string }) {
 
       <div className="space-y-4">
         <h2 className="text-2xl font-bold text-zinc-900 dark:text-white">Tool Breakdown</h2>
-        {data.tools.map((tool: { name: string; currentSpend: number; optimizedSpend: number }, index: number) => (
+        {data.tools.map((tool: any, index: number) => (
           <ToolAuditCard key={index} tool={tool} />
         ))}
       </div>
